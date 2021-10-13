@@ -1,2 +1,2 @@
-# dumbi-cmd
+# Dumbi CMD
 Dumbi CMD is a tool for building, changing, and versioning data infrastructure
