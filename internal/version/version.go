@@ -12,9 +12,9 @@ var version string = time.Now().Format("20060102")
 const Header = "Dumbi-Version"
 
 // String returns the complete version string, including short Git commit hash.
-func String(gitVersion string) string {
-	if gitVersion != "" {
-		return fmt.Sprintf("%s-%s", version, gitVersion)
+func String(commit string) string {
+	if commit != "" {
+		return fmt.Sprintf("%s-%s", version, commit[0:7])
 	}
 
 	return version

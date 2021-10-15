@@ -17,8 +17,8 @@ func TestVersionString_Empty(t *testing.T) {
 }
 
 func TestVersionString_GitHash(t *testing.T) {
-	gitVersion := "112233"
-	versionString := String(gitVersion)
+	commit := "4a396b587c7ff"
+	versionString := String(commit)
 	parts := strings.Split(versionString, "-")
 
 	if len(parts) != 2 {
@@ -26,10 +26,14 @@ func TestVersionString_GitHash(t *testing.T) {
 	}
 
 	if !isDigit(parts[0]) {
-		t.Fatalf("Invalid versionString: %s", versionString)
+		t.Fatalf("Invalid date: %s", versionString)
 	}
 
-	if parts[1] != gitVersion {
-		t.Fatalf("Invalid versionString: %s", versionString)
+	if parts[1] != commit[0:7] {
+		t.Fatalf("Invalid commit: %s", versionString)
+	}
+
+	if len(parts[1]) > 7 {
+		t.Fatalf("Invalid commit length: %s", versionString)
 	}
 }

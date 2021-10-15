@@ -14,3 +14,8 @@ docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000
 # Settings
 export SONARQUBE_URL=http://[IP_ADDRESS]:9000
 ```
+
+### Release
+```shell
+goreleaser release --snapshot --rm-dist
+```

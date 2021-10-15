@@ -22,7 +22,7 @@ SHELL := /usr/bin/env bash
 GIT_COMMIT := $(shell git rev-parse --short HEAD)
 
 build: ## Application build
-	go build -ldflags "-X main.gitCommit=$(GIT_COMMIT)" -o dumbi .
+	go build -ldflags "-X main.commit=$(GIT_COMMIT)" -o dumbi .
 
 sonar: ## SonarQube
 	go test ./... -json > test-report.out

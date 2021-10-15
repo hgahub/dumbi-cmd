@@ -7,14 +7,14 @@ import (
 	"github.com/thatisuday/commando"
 )
 
-var gitCommit string
+var commit string
 
 func main() {
 
 	// configure commando
 	commando.
 		SetExecutableName("dumbi").
-		SetVersion(version.String(gitCommit)).
+		SetVersion(version.String(commit)).
 		SetDescription("This tool lists the contents of a directory in tree-like format.\nIt can also display information about files and folders like size, permission and ownership.")
 
 	commando.
@@ -22,7 +22,7 @@ func main() {
 		SetShortDescription("displays detailed information of a directory").
 		SetDescription("This command displays more information about the contents of the directory like size, permission and ownership, etc.").
 		SetAction(func(args map[string]commando.ArgValue, flags map[string]commando.FlagValue) {
-			fmt.Printf("%s: %s \n\n", version.Header, version.String(gitCommit))
+			fmt.Printf("%s: %s \n\n", version.Header, version.String(commit))
 			fmt.Printf("Usage: \n\tdumbi help\n\n")
 		})
 	commando.
