@@ -1,4 +1,15 @@
-.PHONY: help build
+################################################################################
+# Variables                                                                    #
+################################################################################
+# Commit Hash for CI build.
+GIT_VERSION = $(shell git describe --always --abbrev=7 --dirty)
+
+# It's necessary to set this because some environments don't link sh -> bash.
+SHELL := /usr/bin/env bash
+
+################################################################################
+# Help                                                                         #
+################################################################################
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
@@ -12,19 +23,24 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
+################################################################################
+# Target: help                                                                 #
+################################################################################
+.PHONY: help
 help:  ## Print this help message and exit
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-# It's necessary to set this because some environments don't link sh -> bash.
-SHELL := /usr/bin/env bash
+################################################################################
+# Target: build                                                                #
+################################################################################
+.PHONY: build
+build: ## Generate builds in the dist folder
+	go build -ldflags "-X main.commit=$(GIT_VERSION)" -o dist/dumbi .
 
-# Commit Hash for CI build.
-GIT_COMMIT := $(shell git rev-parse --short HEAD)
-
-build: ## Application build
-	go build -ldflags "-X main.commit=$(GIT_COMMIT)" -o dumbi .
-
-sonar: ## SonarQube
+################################################################################
+# Target: qa                                                                   #
+################################################################################
+qa: ## Quality assurance
 	go test ./... -json > test-report.out
 	go test ./... -coverprofile=coverage.out
 	scripts/sonar.sh
