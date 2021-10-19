@@ -38,12 +38,8 @@ build: ## Generate builds in the dist folder
 	go build -ldflags "-X main.commit=$(GIT_VERSION)" -o dist/dumbi .
 
 ################################################################################
-# Target: qa                                                                   #
+# Target: test                                                                 #
 ################################################################################
-qa: ## Quality assurance
-	go test ./... -json > test-report.out
+test: ## Unit tests
+	go test ./... -json > report.out
 	go test ./... -coverprofile=coverage.out
-	scripts/sonar.sh
-
-test: ## Test
-	go test ./...
