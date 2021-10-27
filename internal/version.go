@@ -14,10 +14,13 @@ type Version struct {
 
 const (
 	// Header is the header name used to send the current dumbi version in http requests.
-	Header        = "Dumbi-Version"
+	Header = "Dumbi-Version"
+
+	// defaultCommit is a default commit.
 	defaultCommit = "0000000"
 )
 
+// NewVersion create a Version struct
 func NewVersion(commit string, releaseVersion string, releaseDate string) *Version {
 	t, err := time.Parse("2006-01-02T15:04:05.000Z", releaseDate)
 	if err != nil {

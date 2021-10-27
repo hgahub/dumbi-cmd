@@ -8,17 +8,23 @@ const (
 )
 
 type Flag struct {
-	// description of the flag
-	description string
+	// Name of the flag
+	Name string
+
+	// Description of the flag
+	Description string
 
 	// data type of the flag value
-	dataType int
+	DataType int
 }
 
 type Command struct {
-	// description of the command
-	description string
+	// Name of the command
+	Name string
 
-	// flags to parse from the command-line arguments
-	flags map[string]*Flag
+	// Description of the command
+	Description string
+
+	// Flags to parse from the command-line arguments
+	Flags map[string]*Flag
 }

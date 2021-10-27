@@ -7,20 +7,20 @@ import (
 	"os"
 )
 
+// date is a ldflags parameter - release date
 var date string
+
+// version is a ldflags parameter - release version
 var version string
+
+// commit is a ldflags parameter - release commit
 var commit string
 
 func main() {
 	internalVersion := internal.NewVersion(commit, version, date)
-	c, err := cli.Parse(internalVersion)
-
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	if c != nil {
+	if c, err := cli.CommandLineRead(internalVersion); err == nil && c.Name != "global" {
 		fmt.Println(c)
+	} else {
+		os.Exit(1)
 	}
 }

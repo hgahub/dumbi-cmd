@@ -19,3 +19,7 @@ export SONARQUBE_URL=http://[IP_ADDRESS]:9000
 ```shell
 goreleaser release --snapshot --rm-dist
 ```
+
+### Links
+- [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
+- [Awesome Go](https://github.com/avelino/awesome-go)

@@ -26,6 +26,15 @@ func TestStringWithCommit(t *testing.T) {
 	testBuildParts(t, version.String(), commit)
 }
 
+func TestStringWithDirtyCommit(t *testing.T) {
+	commit := "4a396b5-dirty"
+	version := NewVersion(commit, "", "")
+	if !strings.HasSuffix(version.String(), "-dirty") {
+		t.Fatalf("Invalid dirty version: %s", version.String())
+	}
+	testBuildParts(t, version.String()[:len(version.String())-6], commit[:len(commit)-6])
+}
+
 func TestStringWithReleaseParameter(t *testing.T) {
 	commit := "4a396b587c7ff"
 	releaseVersion := "1.0.0"
