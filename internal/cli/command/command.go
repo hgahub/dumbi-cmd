@@ -1,4 +1,4 @@
-package cli
+package command
 
 // data type declarations
 const (
@@ -6,6 +6,8 @@ const (
 	Int
 	String
 )
+
+const GlobalFlagCommandName = "global"
 
 type Flag struct {
 	// Name of the flag
@@ -27,4 +29,22 @@ type Command struct {
 
 	// Flags to parse from the command-line arguments
 	Flags map[string]*Flag
+}
+
+type CLICommand interface {
+	run() int
+}
+
+func (c *Command) Execute() int {
+	var cliCommand CLICommand
+	meta := NewMeta()
+
+	switch c.Name {
+	case ValidateCommandName:
+		cliCommand = &ValidateCommand{meta: meta}
+	default:
+		return 126
+	}
+
+	return cliCommand.run()
 }

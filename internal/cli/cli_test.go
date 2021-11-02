@@ -2,6 +2,7 @@ package cli
 
 import (
 	"github.com/hgahub/dumbi-cmd/internal"
+	"github.com/hgahub/dumbi-cmd/internal/cli/command"
 	"os"
 	"testing"
 )
@@ -47,7 +48,7 @@ func TestValidGlobalFlag(t *testing.T) {
 			os.Args = []string{"app", tc.input}
 			c, err := CommandLineRead(internal.NewVersion("", "1", ""))
 
-			if err != nil && c.Name != "global" {
+			if err != nil && c.Name != command.GlobalFlagCommandName {
 				t.Fatalf("Global flag error")
 			}
 
@@ -63,8 +64,8 @@ func TestValidCommand(t *testing.T) {
 		cmd  string
 		name string
 	}{
-		"validate": {cmd: "validate", name: "validate"},
-		"fmt":      {cmd: "fmt", name: "format"},
+		command.ValidateCommandName: {cmd: command.ValidateCommandName, name: command.ValidateCommandName},
+		"fmt":                       {cmd: "fmt", name: "format"},
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {

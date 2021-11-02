@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"github.com/hgahub/dumbi-cmd/internal"
+	"github.com/hgahub/dumbi-cmd/internal/cli/command"
 	"os"
 )
 
@@ -22,17 +23,17 @@ const InvalidArgumentsMsg = "invalid arguments"
 const InvalidGlobalFlagOrCommandMsg = "invalid global flag or command"
 
 // Collection of usable commands
-var commands map[string]Command
+var commands map[string]command.Command
 
 // Initialize the commands map
 func init() {
-	commands = map[string]Command{
-		"validate": {Name: "validate", Description: "validates the configuration files"},
-		"fmt":      {Name: "format", Description: "rewrite Dumbi configuration files to a canonical format and style"},
+	commands = map[string]command.Command{
+		command.ValidateCommandName: {Name: command.ValidateCommandName, Description: command.ValidateCommandDescription},
+		"fmt":                       {Name: "format", Description: "rewrite Dumbi configuration files to a canonical format and style"},
 	}
 }
 
-func CommandLineRead(version *internal.Version) (*Command, error) {
+func CommandLineRead(version *internal.Version) (*command.Command, error) {
 	// General formal verification
 	if len(os.Args) < 2 {
 		fmt.Printf(getHelpText())
@@ -43,7 +44,7 @@ func CommandLineRead(version *internal.Version) (*Command, error) {
 
 	if !isCmd {
 		if f, err := globalFlagVerification(version); err == nil {
-			return &Command{Name: "global", Flags: map[string]*Flag{os.Args[1]: f}}, nil
+			return &command.Command{Name: command.GlobalFlagCommandName, Flags: map[string]*command.Flag{os.Args[1]: f}}, nil
 		} else {
 			msg := fmt.Sprintf("Dumbi has no command named \"%s\".\n\n", os.Args[1])
 			msg += fmt.Sprintln("To see all of Dumbis's commands, run:")
@@ -57,7 +58,7 @@ func CommandLineRead(version *internal.Version) (*Command, error) {
 	}
 }
 
-func globalFlagVerification(version *internal.Version) (*Flag, error) {
+func globalFlagVerification(version *internal.Version) (*command.Flag, error) {
 	var versionString string
 
 	if version != nil {
@@ -67,10 +68,10 @@ func globalFlagVerification(version *internal.Version) (*Flag, error) {
 	switch os.Args[1] {
 	case "-help":
 		fmt.Printf(getHelpText())
-		return &Flag{Name: "help", DataType: String}, nil
+		return &command.Flag{Name: "help", DataType: command.String}, nil
 	case "-version":
 		fmt.Printf("Dumbi %s\n", versionString)
-		return &Flag{Name: "version", DataType: String}, nil
+		return &command.Flag{Name: "version", DataType: command.String}, nil
 	default:
 		return nil, fmt.Errorf("unknown global flag: %s", os.Args[1])
 	}
