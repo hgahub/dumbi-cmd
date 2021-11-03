@@ -1,0 +1,42 @@
+@startuml PD_CONTEXT
+!theme cerulean-outline
+skinparam backgroundColor white
+skinparam linetype polyline
+
+actor "Designer"    as ACTOR_DESIGNER
+actor "Editor"      as ACTOR_EDITOR
+actor "User"        as ACTOR_USER
+
+frame "User Environment" as USER_ENV {
+    node "Dumbi CMD" as DB_CMD
+}
+frame "Cloud"{
+    node "Dumbi Service" as DB_SERVICE
+    node "Dumbi Gatsby Service" as DB_GATSBY_SERVICE
+
+    frame "Web Module" AS WEB_MODULE {
+        node "Dumbi React Module" as DB_REACT_MODULE
+    }
+}
+
+frame "Web Client" AS WEB_CLIENT {
+    node "Data Query"  as WEB_CLIENT_DB_QUERY
+    node "Data Editor" as WEB_CLIENT_DB_EDITOR
+}
+
+ACTOR_DESIGNER          --> DB_CMD
+note on link
+  Model file (.df)
+end note
+
+ACTOR_EDITOR            --> DB_GATSBY_SERVICE
+DB_CMD                  --> DB_SERVICE
+
+DB_GATSBY_SERVICE       -[dotted]-> DB_SERVICE
+DB_GATSBY_SERVICE       -[dotted]-> WEB_MODULE
+
+ACTOR_USER              --> WEB_CLIENT
+WEB_CLIENT_DB_QUERY     --> DB_GATSBY_SERVICE
+WEB_CLIENT_DB_EDITOR    --> WEB_MODULE
+
+@enduml
