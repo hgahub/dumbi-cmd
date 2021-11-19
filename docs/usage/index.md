@@ -18,4 +18,5 @@ Options (use these before the subcommand, if any):
 ```
 
 ## Commands
+
 - **[validate](./command_validate.md)** Validates the configuration files in a directory.

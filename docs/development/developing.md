@@ -1,6 +1,7 @@
 # Developing
 
 ## Build the binaries
+
 You can build binaries with the make tool.
 
 ```bash

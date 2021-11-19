@@ -4,7 +4,7 @@ This file includes links to development documentation. Please see the [Dumbi doc
 
 ## Docs
 
-* **[Architecture](./architecture/index.md) -** Records for **architectural design**
-* **[Development documentation](./development/index.md) -** How to setup developer environment and change code
-* **[Release notes](./release_notes) -** Release notes for Dumbi CMD
-* **[Usage](./usage/index.md) -** CLI Documentation
+- **[Architecture](./architecture/index.md) -** Records for **architectural design**
+- **[Development documentation](./development/index.md) -** How to setup developer environment and change code
+- **[Release notes](./release_notes) -** Release notes for Dumbi CMD
+- **[Usage](./usage/index.md) -** CLI Documentation

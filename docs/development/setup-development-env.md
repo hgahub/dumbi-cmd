@@ -1,4 +1,5 @@
 # Setup development environment
+
 This document helps you get started developing Dumbi CMD.
 
 ## Git
@@ -11,21 +12,21 @@ This document helps you get started developing Dumbi CMD.
 
 1. Download and install [Go 1.17 or later](https://golang.org/doc/install#tarball).
 
-    - Make sure that your `GOPATH` and `PATH` environment variables are configured so that go modules can be run. For example:
+   - Make sure that your `GOPATH` and `PATH` environment variables are configured so that go modules can be run. For example:
 
-      **Linux and MacOS**
+     **Linux and MacOS**
 
-      ```bash
-      export GOPATH=~/go
-      export PATH=$PATH:$GOPATH/bin
-      ```
+     ```bash
+     export GOPATH=~/go
+     export PATH=$PATH:$GOPATH/bin
+     ```
 
-      **Windows**
+     **Windows**
 
-      ```cmd
-      set GOPATH=%USERPROFILE%\go
-      set PATH=%PATH%;%GOPATH%\bin
-      ```
+     ```cmd
+     set GOPATH=%USERPROFILE%\go
+     set PATH=%PATH%;%GOPATH%\bin
+     ```
 
 ## Installing Make
 
@@ -71,4 +72,20 @@ Make needs to be installed as appropriate for your platform:
 
 1. Install [pre-commit](https://pre-commit.com/#install)
 2. Install the git hook scripts: `pre-commit install`
-3. Run against all the files: `pre-commit run --all-files`
+3. Run:
+   ```shell
+   pre-commit run --all-files  # run all hooks on all files
+   pre-commit run <HOOK_ID> --all-files # run one hook on all files
+   pre-commit run --files <PATH_TO_FILE>  # run all hooks on a file
+   pre-commit run <HOOK_ID> --files <PATH_TO_FILE> # run one hook on a file
+   ```
+4. Skip:
+   ```shell
+   # Commit without hooks
+   git commit -m <MESSAGE> --no-verify
+   ```
+5. Update:
+   ```shell
+   # Autoupdate
+   pre-commit autoupdate
+   ```
