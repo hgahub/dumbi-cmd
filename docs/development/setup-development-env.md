@@ -66,3 +66,9 @@ Make needs to be installed as appropriate for your platform:
    ```cmd
    mklink C:\ProgramData\chocolatey\bin\make.exe C:\ProgramData\chocolatey\bin\mingw32-make.exe
    ```
+
+## Pre-Commit Hooks
+
+1. Install [pre-commit](https://pre-commit.com/#install)
+2. Install the git hook scripts: `pre-commit install`
+3. Run against all the files: `pre-commit run --all-files`

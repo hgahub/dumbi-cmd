@@ -1,6 +1,6 @@
 # CLI Documentation
 
-To view a list of the commands available in your current Dumbi version, 
+To view a list of the commands available in your current Dumbi version,
 run terraform with no additional arguments:
 
 ```shell
